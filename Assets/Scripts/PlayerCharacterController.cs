@@ -143,6 +143,7 @@ public class PlayerCharacterController : MonoBehaviour {
 
 		Debug.DrawLine(transform.position, (((transform.position + movement.normalized) - transform.position) * movement.magnitude * 1.4f) + transform.position, Color.red);
 		charController.Move(movement);
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
 		grabObject();
 		throwObject();
@@ -162,7 +163,7 @@ public class PlayerCharacterController : MonoBehaviour {
 		if (hit.gameObject.tag == seeSawMoverTag) {
 		
 			//Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-			Vector3 pushDir =  playerBody.forward; //Quaternion.AngleAxis(-seeSaw.transform.rotation.eulerAngles.x, Vector3.forward) *
+			Vector3 pushDir = moveDir;// playerBody.forward; //Quaternion.AngleAxis(-seeSaw.transform.rotation.eulerAngles.x, Vector3.forward) *
 
 			if (body.GetComponent<ObstacleClass>().weight > grabThreshold) {
 				body.velocity = pushDir * pushPower;
